@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dipesh Shome - WhatsApp Card</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0d1421;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .whatsapp-card {
+            width: 320px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: bold;
+            margin: 0 auto 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .name {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .title {
+            color: #a8c8ff;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .company {
+            color: #4ecdc4;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .contact-section {
+            margin: 20px 0;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            font-size: 13px;
+            background: rgba(255,255,255,0.1);
+            padding: 10px;
+            border-radius: 8px;
+            backdrop-filter: blur(5px);
+        }
+
+        .contact-icon {
+            width: 20px;
+            height: 20px;
+            background: #4ecdc4;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .social-section {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .social-title {
+            font-size: 12px;
+            color: #a8c8ff;
+            margin-bottom: 10px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .social-link {
+            background: rgba(255,255,255,0.15);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 600;
+            color: white;
+            backdrop-filter: blur(5px);
+        }
+
+        .portfolio-section {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .portfolio-text {
+            font-size: 12px;
+            color: #a8c8ff;
+            margin-bottom: 8px;
+        }
+
+        .portfolio-url {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            word-break: break-all;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(255,107,107,0.4);
+        }
+
+        .whatsapp-note {
+            background: rgba(37, 211, 102, 0.2);
+            border: 1px solid rgba(37, 211, 102, 0.3);
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 11px;
+            text-align: center;
+            margin-top: 15px;
+            color: #90EE90;
+        }
+
+        .tech-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 10px;
+            font-size: 9px;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+
+        .save-note {
+            background: rgba(255,193,7,0.2);
+            border: 1px solid rgba(255,193,7,0.3);
+            padding: 8px;
+            border-radius: 6px;
+            font-size: 10px;
+            text-align: center;
+            margin-top: 10px;
+            color: #FFD700;
+        }
+    </style>
+</head>
+<body>
+    <div class="whatsapp-card">
+        <div class="tech-badge">AI Expert</div>
+        
+        <div class="header">
+            <div class="avatar">DS</div>
+            <div class="name">Dipesh Shome</div>
+            <div class="title">AI Software Engineer</div>
+            <div class="company">LifePlus Bangladesh Limited</div>
+        </div>
+
+        <div class="contact-section">
+            <div class="contact-item">
+                <div class="contact-icon">📱</div>
+                <span>+880 1822 409776</span>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">✉️</div>
+                <span>dshome.cse@gmail.com</span>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">📍</div>
+                <span>Dhaka, Bangladesh</span>
+            </div>
+        </div>
+
+        <div class="social-section">
+            <div class="social-title">Connect with me:</div>
+            <div class="social-links">
+                <div class="social-link">GitHub: Dipesh-Shome</div>
+                <div class="social-link">LinkedIn: Dipesh-Shome</div>
+                <div class="social-link">Kaggle: Dipesh-Shome</div>
+            </div>
+        </div>
+
+        <div class="portfolio-section">
+            <div class="portfolio-text">🚀 Portfolio Website:</div>
+            <div class="portfolio-url">brainiac-ai-qqx0.onrender.com</div>
+        </div>
+
+        <div class="whatsapp-note">
+            💾 Save this contact • 🔄 Share with others
+        </div>
+
+        <div class="save-note">
+            Screenshot this card to save my contact info!
+        </div>
+    </div>
+</body>
+</html>
