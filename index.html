@@ -46,17 +46,22 @@
         .avatar {
             width: 80px;
             height: 80px;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-            font-weight: bold;
+            object-fit: cover; /* Add this */
+            display: block; /* Change from flex */
             margin: 0 auto 15px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.3);
             cursor: pointer;
             transition: transform 0.3s ease;
+            border: 3px solid rgba(255,255,255,0.2);
+        }
+
+        .avatar::before {
+            
+        }
+
+        .avatar::after {
+ 
         }
 
         .avatar:hover {
@@ -158,29 +163,6 @@
             transform: translateY(-3px) scale(1.1);
         }
 
-        .social-link img {
-            width: 24px;
-            height: 24px;
-            filter: brightness(0) invert(1);
-        }
-
-        .social-link::before {
-            font-size: 20px;
-            display: none;
-        }
-
-        .social-link[data-platform="github"]::before {
-            content: "🐙";
-        }
-
-        .social-link[data-platform="linkedin"]::before {
-            content: "💼";
-        }
-
-        .social-link[data-platform="kaggle"]::before {
-            content: "📊";
-        }
-
         .portfolio-section {
             text-align: center;
             margin-top: 20px;
@@ -212,17 +194,6 @@
         .portfolio-url:hover {
             transform: scale(1.05);
             box-shadow: 0 6px 20px rgba(255,107,107,0.6);
-        }
-
-        .whatsapp-note {
-            background: rgba(37, 211, 102, 0.2);
-            border: 1px solid rgba(37, 211, 102, 0.3);
-            padding: 10px;
-            border-radius: 8px;
-            font-size: 11px;
-            text-align: center;
-            margin-top: 15px;
-            color: #90EE90;
         }
 
         .tech-badge {
@@ -265,18 +236,20 @@
 
         .action-buttons {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             margin-top: 15px;
+            flex-wrap: wrap;
         }
 
         .action-btn {
             flex: 1;
+            min-width: 70px;
             background: rgba(255,255,255,0.1);
             border: none;
             color: white;
-            padding: 10px;
+            padding: 8px;
             border-radius: 8px;
-            font-size: 11px;
+            font-size: 10px;
             cursor: pointer;
             transition: all 0.3s ease;
             backdrop-filter: blur(5px);
@@ -295,6 +268,217 @@
             background: rgba(37, 211, 102, 0.5) !important;
         }
 
+        .calendar-btn {
+            background: rgba(255, 107, 107, 0.3) !important;
+        }
+
+        .calendar-btn:hover {
+            background: rgba(255, 107, 107, 0.5) !important;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            color: white;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            right: 15px;
+            top: 10px;
+        }
+
+        .close:hover {
+            color: white;
+        }
+
+        .calendar-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .calendar-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .nav-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 2px;
+            margin-bottom: 20px;
+        }
+
+        .calendar-day {
+            background: rgba(255,255,255,0.1);
+            padding: 10px 5px;
+            text-align: center;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 12px;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .calendar-day:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .calendar-day.selected {
+            background: rgba(255, 107, 107, 0.5);
+            border: 2px solid #ff6b6b;
+        }
+
+        .calendar-day.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .calendar-day.other-month {
+            opacity: 0.5;
+        }
+
+        .day-header {
+            font-weight: bold;
+            background: rgba(255,255,255,0.2);
+            font-size: 10px;
+            padding: 5px;
+        }
+
+        .meeting-form {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 12px;
+            color: #a8c8ff;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 6px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 12px;
+        }
+
+        .form-group input::placeholder, .form-group textarea::placeholder {
+            color: rgba(255,255,255,0.6);
+        }
+
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .time-slot {
+            background: rgba(255,255,255,0.1);
+            padding: 8px;
+            text-align: center;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 11px;
+            border: 2px solid transparent;
+        }
+
+        .time-slot:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .time-slot.selected {
+            background: rgba(78, 205, 196, 0.3);
+            border-color: #4ecdc4;
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            width: 100%;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .success-message {
+            background: rgba(37, 211, 102, 0.2);
+            border: 1px solid rgba(37, 211, 102, 0.5);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            color: #90EE90;
+            margin-top: 15px;
+            font-size: 12px;
+        }
+
         /* Floating animation for the card */
         @keyframes float {
             0%, 100% { transform: translateY(0); }
@@ -311,10 +495,10 @@
         <div class="tech-badge">AI/ML Expert</div>
         
         <div class="header">
-            <div class="avatar" onclick="showGreeting()">DS</div>
+            <img src="image.png" alt="Dipesh Shome" class="avatar" onclick="showGreeting()">
             <div class="name">Dipesh Shome</div>
             <div class="title">AI/ML Software Engineer</div>
-            <div class="company">LifePlus Bangladesh Limited (Sister Cooncern of Labaid Group) </div>
+            <div class="company">LifePlus Bangladesh Limited (Sister Concern of Labaid Group)</div>
         </div>
 
         <div class="contact-section">
@@ -335,17 +519,17 @@
         <div class="social-section">
             <div class="social-title">Connect with me:</div>
             <div class="social-links">
-                <a href="https://github.com/Dipeshshome" target="_blank" class="social-link" title="GitHub" data-platform="github">
+                <a href="https://github.com/Dipeshshome" target="_blank" class="social-link" title="GitHub">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
                         <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.770.840 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.430.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                     </svg>
                 </a>
-                <a href="https://www.linkedin.com/in/dipesh-shome-575854113/" target="_blank" class="social-link" title="LinkedIn" data-platform="linkedin">
+                <a href="https://www.linkedin.com/in/dipesh-shome-575854113/" target="_blank" class="social-link" title="LinkedIn">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
                         <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                     </svg>
                 </a>
-                <a href="https://kaggle.com/Dipesh-Shome" target="_blank" class="social-link" title="Kaggle" data-platform="kaggle">
+                <a href="https://kaggle.com/Dipesh-Shome" target="_blank" class="social-link" title="Kaggle">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
                         <path d="M18.825 23.859c-.022.092-.117.141-.281.141h-3.139c-.187 0-.351-.082-.492-.248l-5.178-6.589-1.448 1.374v5.111c0 .235-.117.352-.351.352H5.505c-.236 0-.354-.117-.354-.352V.353c0-.233.118-.353.354-.353h2.431c.234 0 .351.12.351.353v14.343l6.203-6.272c.165-.165.33-.248.495-.248h3.239c.144 0 .236.06.285.18.046.149.034.255-.036.315l-6.555 6.344 6.836 8.507c.095.104.117.208.07.338"/>
                     </svg>
@@ -364,11 +548,14 @@
             <button class="action-btn whatsapp-btn" onclick="openWhatsApp()">
                 💬 WhatsApp
             </button>
+            <button class="action-btn calendar-btn" onclick="openCalendar()">
+                📅 Schedule
+            </button>
             <button class="action-btn" onclick="saveContact()">
-                💾 Save Contact
+                💾 Save
             </button>
             <button class="action-btn" onclick="shareCard()">
-                🔄 Share Card
+                🔄 Share
             </button>
         </div>
 
@@ -377,7 +564,84 @@
         </div>
     </div>
 
+    <!-- Calendar Modal -->
+    <div id="calendarModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeCalendar()">&times;</span>
+            <div class="calendar-header">
+                <h3>📅 Schedule a Meeting with Dipesh</h3>
+            </div>
+            
+            <div class="calendar-nav">
+                <button class="nav-btn" onclick="changeMonth(-1)">‹ Previous</button>
+                <h4 id="currentMonth"></h4>
+                <button class="nav-btn" onclick="changeMonth(1)">Next ›</button>
+            </div>
+
+            <div class="calendar-grid" id="calendarGrid">
+                <!-- Calendar will be generated here -->
+            </div>
+
+            <div class="meeting-form" id="meetingForm" style="display: none;">
+                <h4>Meeting Details</h4>
+                <div class="form-group">
+                    <label>Selected Date:</label>
+                    <input type="text" id="selectedDate" readonly>
+                </div>
+                
+                <div class="form-group">
+                    <label>Available Time Slots:</label>
+                    <div class="time-slots" id="timeSlots">
+                        <div class="time-slot" onclick="selectTime('09:00')">09:00 AM</div>
+                        <div class="time-slot" onclick="selectTime('10:00')">10:00 AM</div>
+                        <div class="time-slot" onclick="selectTime('11:00')">11:00 AM</div>
+                        <div class="time-slot" onclick="selectTime('14:00')">02:00 PM</div>
+                        <div class="time-slot" onclick="selectTime('15:00')">03:00 PM</div>
+                        <div class="time-slot" onclick="selectTime('16:00')">04:00 PM</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Your Name:</label>
+                    <input type="text" id="userName" placeholder="Enter your full name">
+                </div>
+
+                <div class="form-group">
+                    <label>Your Email:</label>
+                    <input type="email" id="userEmail" placeholder="Enter your email address">
+                </div>
+
+                <div class="form-group">
+                    <label>Meeting Type:</label>
+                    <select id="meetingType">
+                        <option value="consultation">AI/ML Consultation</option>
+                        <option value="collaboration">Project Collaboration</option>
+                        <option value="interview">Technical Interview</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Meeting Description:</label>
+                    <textarea id="meetingDescription" placeholder="Brief description of what you'd like to discuss..." rows="3"></textarea>
+                </div>
+
+                <button class="submit-btn" onclick="scheduleMeeting()">
+                    📅 Schedule Meeting
+                </button>
+
+                <div id="successMessage" class="success-message" style="display: none;">
+                    ✅ Meeting scheduled successfully! I'll send you a confirmation email shortly.
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
+        let currentDate = new Date();
+        let selectedDate = null;
+        let selectedTime = null;
+
         function showGreeting() {
             alert("Hello! 👋 I'm Dipesh Shome, an AI Software Engineer passionate about building intelligent solutions!");
         }
@@ -390,20 +654,230 @@
             window.open('https://wa.me/8801822409776?text=Hi%20Dipesh!%20I%20found%20your%20digital%20business%20card.', '_blank');
         }
 
+        function openCalendar() {
+            document.getElementById('calendarModal').style.display = 'block';
+            renderCalendar();
+        }
+
+        function closeCalendar() {
+            document.getElementById('calendarModal').style.display = 'none';
+            document.getElementById('meetingForm').style.display = 'none';
+            resetForm();
+        }
+
+        function renderCalendar() {
+            const grid = document.getElementById('calendarGrid');
+            const monthElement = document.getElementById('currentMonth');
+            
+            const year = currentDate.getFullYear();
+            const month = currentDate.getMonth();
+            
+            monthElement.textContent = new Date(year, month).toLocaleDateString('en-US', { 
+                month: 'long', 
+                year: 'numeric' 
+            });
+
+            // Clear previous calendar
+            grid.innerHTML = '';
+
+            // Day headers
+            const dayHeaders = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            dayHeaders.forEach(day => {
+                const dayHeader = document.createElement('div');
+                dayHeader.className = 'calendar-day day-header';
+                dayHeader.textContent = day;
+                grid.appendChild(dayHeader);
+            });
+
+            // Get first day of month and number of days
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const today = new Date();
+
+            // Previous month's trailing days
+            const prevMonth = new Date(year, month, 0).getDate();
+            for (let i = firstDay - 1; i >= 0; i--) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day other-month disabled';
+                dayElement.textContent = prevMonth - i;
+                grid.appendChild(dayElement);
+            }
+
+            // Current month's days
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day';
+                dayElement.textContent = day;
+                
+                const currentDay = new Date(year, month, day);
+                
+                // Disable past dates
+                if (currentDay < today.setHours(0, 0, 0, 0)) {
+                    dayElement.classList.add('disabled');
+                } else {
+                    dayElement.onclick = () => selectDate(year, month, day, dayElement);
+                }
+                
+                grid.appendChild(dayElement);
+            }
+
+            // Next month's leading days
+            const totalCells = grid.children.length;
+            const remainingCells = 42 - totalCells; // 6 rows × 7 days
+            for (let day = 1; day <= remainingCells; day++) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day other-month disabled';
+                dayElement.textContent = day;
+                grid.appendChild(dayElement);
+            }
+        }
+
+        function changeMonth(direction) {
+            currentDate.setMonth(currentDate.getMonth() + direction);
+            renderCalendar();
+        }
+
+        function selectDate(year, month, day, element) {
+            // Remove previous selection
+            document.querySelectorAll('.calendar-day.selected').forEach(el => {
+                el.classList.remove('selected');
+            });
+
+            // Add selection to clicked date
+            element.classList.add('selected');
+            
+            selectedDate = new Date(year, month, day);
+            document.getElementById('selectedDate').value = selectedDate.toLocaleDateString('en-US', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            
+            document.getElementById('meetingForm').style.display = 'block';
+            document.getElementById('successMessage').style.display = 'none';
+        }
+
+        function selectTime(time) {
+            // Remove previous time selection
+            document.querySelectorAll('.time-slot.selected').forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            // Add selection to clicked time
+            event.target.classList.add('selected');
+            selectedTime = time;
+        }
+
+        function scheduleMeeting() {
+            const userName = document.getElementById('userName').value;
+            const userEmail = document.getElementById('userEmail').value;
+            const meetingType = document.getElementById('meetingType').value;
+            const description = document.getElementById('meetingDescription').value;
+
+            if (!userName || !userEmail || !selectedTime) {
+                alert('Please fill in all required fields and select a time slot.');
+                return;
+            }
+
+            // Validate email format
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(userEmail)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+
+            // Create meeting details
+            const meetingDetails = {
+                date: selectedDate.toLocaleDateString('en-US', {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                }),
+                time: selectedTime,
+                userName: userName,
+                userEmail: userEmail,
+                meetingType: meetingType,
+                description: description
+            };
+
+            // Simulate scheduling (in real implementation, this would send data to a server)
+            console.log('Meeting scheduled:', meetingDetails);
+            
+            // Create calendar event URL (Google Calendar)
+            const startDate = new Date(selectedDate);
+            const [hours, minutes] = selectedTime.split(':');
+            startDate.setHours(parseInt(hours), parseInt(minutes), 0, 0);
+            
+            const endDate = new Date(startDate);
+            endDate.setHours(startDate.getHours() + 1); // 1 hour meeting
+            
+            const formatDateForCalendar = (date) => {
+                return date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+            };
+            
+            const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE` +
+                `&text=Meeting with Dipesh Shome - ${meetingType}` +
+                `&dates=${formatDateForCalendar(startDate)}/${formatDateForCalendar(endDate)}` +
+                `&details=${encodeURIComponent(`Meeting Type: ${meetingType}\nDescription: ${description}\nContact: dshome.cse@gmail.com`)}` +
+                `&location=Online (Link will be provided)`;
+
+            // Show success message
+            document.getElementById('successMessage').style.display = 'block';
+            
+            // Auto-scroll to success message
+            document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+
+            // Reset form after 3 seconds
+            setTimeout(() => {
+                if (confirm('Would you like to add this meeting to your Google Calendar?')) {
+                    window.open(calendarUrl, '_blank');
+                }
+                closeCalendar();
+            }, 2000);
+        }
+
+        function resetForm() {
+            document.getElementById('userName').value = '';
+            document.getElementById('userEmail').value = '';
+            document.getElementById('meetingDescription').value = '';
+            document.getElementById('meetingType').selectedIndex = 0;
+            document.getElementById('successMessage').style.display = 'none';
+            
+            // Clear selected time
+            document.querySelectorAll('.time-slot.selected').forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            // Clear selected date
+            document.querySelectorAll('.calendar-day.selected').forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            selectedDate = null;
+            selectedTime = null;
+        }
+
         function saveContact() {
-            // Create vCard data
-            const vCardData = `BEGIN:VCARD
+            // Create vCard format
+            const vCard = `BEGIN:VCARD
 VERSION:3.0
-FN: Dipesh Shome
-ORG: LifePlus Bangladesh Limited (Sister Cooncern of Labaid Group)
-TITLE: AI/ML Software Engineer
-TEL:+880 1822 409776
+FN:Dipesh Shome
+ORG:LifePlus Bangladesh Limited
+TITLE:AI/ML Software Engineer
+TEL;TYPE=CELL:+8801822409776
 EMAIL:dshome.cse@gmail.com
 URL:https://brainiac-ai-qqx0.onrender.com
-NOTE: AI Expert specializing in software engineering and machine learning
-END: VCARD`;
+URL:https://github.com/Dipeshshome
+URL:https://www.linkedin.com/in/dipesh-shome-575854113/
+URL:https://kaggle.com/Dipesh-Shome
+ADR;TYPE=WORK:;;Dhaka;;Bangladesh
+NOTE:AI/ML Software Engineer specializing in intelligent solutions
+END:VCARD`;
 
-            const blob = new Blob([vCardData], { type: 'text/vcard' });
+            // Create downloadable file
+            const blob = new Blob([vCard], { type: 'text/vcard' });
             const url = window.URL.createObjectURL(blob);
             const link = document.createElement('a');
             link.href = url;
@@ -413,54 +887,86 @@ END: VCARD`;
             document.body.removeChild(link);
             window.URL.revokeObjectURL(url);
             
-            alert("📱 Contact saved! Check your downloads folder for the vCard file.");
+            // Show confirmation
+            alert('📱 Contact saved! Check your downloads folder for the .vcf file.');
         }
 
         function shareCard() {
             if (navigator.share) {
                 navigator.share({
-                    title: 'Dipesh Shome - AI Software Engineer',
+                    title: 'Dipesh Shome - AI/ML Software Engineer',
                     text: 'Check out my digital business card!',
                     url: window.location.href
-                });
+                }).catch(console.error);
             } else {
                 // Fallback for browsers that don't support Web Share API
-                const cardUrl = window.location.href;
-                navigator.clipboard.writeText(cardUrl).then(() => {
-                    alert("🔗 Card URL copied to clipboard! Share it with others.");
-                }).catch(() => {
-                    prompt("Copy this URL to share the card:", cardUrl);
-                });
+                const shareData = `Dipesh Shome - AI/ML Software Engineer
+📱 +880 1822 409776
+✉️ dshome.cse@gmail.com
+🚀 Portfolio: https://brainiac-ai-qqx0.onrender.com
+💼 LinkedIn: https://www.linkedin.com/in/dipesh-shome-575854113/
+👨‍💻 GitHub: https://github.com/Dipeshshome
+📊 Kaggle: https://kaggle.com/Dipesh-Shome`;
+
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(shareData).then(() => {
+                        alert('📋 Contact info copied to clipboard!');
+                    }).catch(() => {
+                        showShareModal(shareData);
+                    });
+                } else {
+                    showShareModal(shareData);
+                }
             }
         }
 
-        function downloadCard() {
-            alert("📸 Right-click on the card and select 'Save image as...' or take a screenshot to save!");
+        function showShareModal(shareData) {
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.style.display = 'block';
+            modal.innerHTML = `
+                <div class="modal-content" style="max-width: 400px;">
+                    <span class="close" onclick="this.parentElement.parentElement.remove()">&times;</span>
+                    <h3>📤 Share Contact Info</h3>
+                    <textarea readonly style="width: 100%; height: 200px; margin: 10px 0; padding: 10px; border-radius: 6px; background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.3);">${shareData}</textarea>
+                    <button onclick="navigator.clipboard ? navigator.clipboard.writeText(\`${shareData.replace(/`/g, '\\`')}\`) : null; alert('Copied to clipboard!'); this.parentElement.parentElement.remove();" style="width: 100%; padding: 10px; background: linear-gradient(45deg, #ff6b6b, #4ecdc4); color: white; border: none; border-radius: 6px; cursor: pointer;">
+                        📋 Copy to Clipboard
+                    </button>
+                </div>
+            `;
+            document.body.appendChild(modal);
         }
 
-        // Add some interactive effects
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add click sound effect (optional)
-            document.querySelectorAll('.contact-item, .social-link, .action-btn').forEach(element => {
-                element.addEventListener('click', function() {
-                    // You could add a click sound here if desired
-                    this.style.transform = 'scale(0.95)';
-                    setTimeout(() => {
-                        this.style.transform = '';
-                    }, 150);
-                });
-            });
+        function downloadCard() {
+            // Try to use the new Web Share API for screenshots if available
+            if (navigator.share && 'canShare' in navigator) {
+                alert('📸 Take a screenshot of this page to save my contact info, or use the "💾 Save" button to download my contact card!');
+            } else {
+                alert('📸 Take a screenshot of this page to save my contact info, or use the "💾 Save" button to download my contact card!');
+            }
+        }
 
-            // Add welcome message after 3 seconds
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('calendarModal');
+            if (event.target === modal) {
+                closeCalendar();
+            }
+        }
+
+        // Initialize calendar when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add some entrance animation
             setTimeout(() => {
-                console.log("👋 Welcome to Dipesh's interactive business card!");
-            }, 3000);
+                document.querySelector('.whatsapp-card').style.opacity = '1';
+                document.querySelector('.whatsapp-card').style.transform = 'translateY(0)';
+            }, 100);
         });
 
-        // Add keyboard navigation
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' && e.target.classList.contains('contact-item')) {
-                e.target.click();
+        // Add keyboard navigation for accessibility
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeCalendar();
             }
         });
     </script>
